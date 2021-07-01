@@ -15,15 +15,18 @@ export const Todo = () => {
     const [todos, setTodos] = useState([
         {
             text: 'some',
-            id: v4()
+            id: v4(),
+            isCompleted: true
         },
         {
             text: 'some some',
-            id: v4()
+            id: v4(),
+            isCompleted: false
         },
         {
             text: 'another todo',
-            id: v4()
+            id: v4(),
+            isCompleted: true
         }
     ]);
 
@@ -45,7 +48,8 @@ export const Todo = () => {
         } else {
             const todo = {
                 text: newTodo,
-                id: v4()
+                id: v4(),
+                isCompleted: false
             }
             updatedTodos = [...todos, todo];
         }
@@ -74,6 +78,16 @@ export const Todo = () => {
         }
     }
 
+    const handleComplete = (id) => {
+        const updatedTodos = todos.map(todo => {
+            if (todo.id === id) {
+                return { ...todo, isCompleted: !todo.isCompleted }
+            }
+            return todo;
+        });
+        setTodos(updatedTodos);
+    }
+
     return (
         <>
             <h1>To do app</h1>
@@ -95,8 +109,11 @@ export const Todo = () => {
                     {todos.map((todo, index) => {
                         return (
                             <ListGroupItem key={index} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                                {todo.text}
+                                <span style={{ textDecoration: todo.isCompleted ? 'line-through' : 'initial' }}>{todo.text}</span>
                                 <div>
+                                    <Button variant="info" style={{ marginRight: '16px' }} onClick={() => {
+                                        handleComplete(todo.id);
+                                    }}>{todo.isCompleted ? 'Uncomplete' : 'Complete'}</Button>
                                     <Button variant="warning" style={{ marginRight: '16px' }} onClick={() => {
                                         handleEdit(todo.id)
                                     }}>Edit</Button>

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 
-export const Counter = () => {
+export const Counter = (props) => {
     const [count, setCount] = useState(0);
 
     const handleIncrement = () => {
@@ -17,7 +17,8 @@ export const Counter = () => {
     }
     return (
         <>
-            <h1>Counter app</h1>
+            <h1>{props.userName}, Welcome to our Counter app, you are {props.userAge}</h1>
+            <Button onClick={props.handleReset}>Reset my Data</Button>
             <div className="flexbox">
                 <h2>Current count: {count}</h2>
                 <Button onClick={handleIncrement}>Increment</Button>
