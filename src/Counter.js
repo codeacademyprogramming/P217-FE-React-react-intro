@@ -17,7 +17,7 @@ export const Counter = (props) => {
     }
     return (
         <>
-            <h1>{props.userName}, Welcome to our Counter app, you are {props.userAge}</h1>
+            <h1>Welcome to our Counter app, you are {props.userAge}</h1>
             <Button onClick={props.handleReset}>Reset my Data</Button>
             <div className="flexbox">
                 <h2>Current count: {count}</h2>
